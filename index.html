@@ -1,0 +1,205 @@
+!DOCTYPE html>
+<html lang="en"><
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personalized Message</title>
+  <style>
+    body {
+      background-color: pink;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: 20px; /* Increased base font size */
+    }
+    h1 {
+      color: red;
+      font-size: 36px; /* Bigger heading */
+      margin-bottom: 20px;
+    }
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 400px;
+      margin: auto;
+    }
+    .image-grid img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain; /* Changed from cover to contain */
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideIn 1s forwards;
+      background-color: white; /* helps show edges if image aspect ratio differs */
+    }
+    .image-grid img:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+    .image-grid img:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+    .image-grid img:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+    .image-grid img:nth-child(4) {
+      animation-delay: 0.8s;
+    }
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .image-grid img:hover {
+      transform: scale(1.1);
+      transition: transform 0.3s;
+      z-index: 1;
+    }
+    .heart-image {
+      width: 80px;
+      height: 80px;
+      margin-top: 20px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    .content, .other-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .content.active, .other-content.active {
+      display: block;
+      opacity: 1;
+    }
+    #name-form {
+      margin-top: 150px;
+    }
+    #name-input {
+      padding: 12px;
+      font-size: 20px; /* Bigger input font */
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 250px;
+    }
+    #submit-button {
+      padding: 12px 24px;
+      font-size: 20px; /* Bigger button font */
+      margin-left: 10px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    #submit-button:hover {
+      background-color: darkred;
+    }
+    .message, .quote {
+      margin-top: 20px;
+      font-size: 22px; /* Bigger message font */
+      color: #444;
+    }
+    .quote {
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <!-- Name entry form -->
+  <div id="name-form">
+    <input type="text" id="name-input" placeholder="Enter your name..." />
+    <button id="submit-button">Enter</button>
+  </div>
+
+  <!-- Content if name is 'tanuu' -->
+  <div class="content" id="tanuu-content">
+    <h1>Heyy Tanuu I love you!! ❤️</h1>
+    <div class="image-grid">
+      <img src="N.jpg" alt="N" />
+      <img src="U.jpg" alt="U" />
+      <img src="K.jpg" alt="K" />
+      <img src="V.jpg" alt="V" />
+    </div>
+    <img src="Heart.png" alt="Heart" class="heart-image" />
+    <div class="message">
+      You are my amazing one sweetheart tanuu
+    </div>
+    <div class="quote">
+      "There is only one happiness in life, to love and be loved."
+    </div>
+  </div>
+
+  <!-- Content if name is 'om' -->
+  <div class="other-content" id="om-content">
+    <h1>Hey Om!</h1>
+    <p class="message">
+      I’m not just blessed to have you, but I’m also lucky to be with an amazing, understanding and loving friend like you. With each passing day, you always see and bring out the best in me and I want you to know that you’re the best part of me and I will always cherish every single day with you. I love you to the moon and back, my dearest friend.
+    </p>
+    <p class="message" style="font-weight: bold; margin-top: 20px;">
+      We may not have a photo together, but we have many memories. love you brother
+    </p>
+  </div>
+
+  <!-- Content if name is 'rashmi' -->
+  <div class="content" id="rashmi-content">
+    <h1>Hey Rashmi!</h1>
+    <div class="image-grid">
+      <img src="R.jpg" alt="R" />
+      <img src="A.jpg" alt="A" />
+      <img src="S.jpg" alt="S" />
+      <img src="H.jpg" alt="H" />
+    </div>
+    <div class="message" style="margin-top: 30px;">
+      Did you know you are the best sister in this world!!
+    </div>
+    <div class="quote">
+      “We’ll always fight, but we’ll always make up as well. That’s what sisters do: we argue, we point out each other’s frailties, mistakes, and bad judgment, we flash the insecurities we’ve had since childhood, and then we come back together. Until the next time.”
+    </div>
+  </div>
+
+  <!-- Content if name is something else -->
+  <div class="other-content" id="other-content">
+    <h1>Hello!</h1>
+    <p class="message">You are special and appreciated. Have a wonderful day! 🌟</p>
+  </div>
+
+  <script>
+    const submitButton = document.getElementById('submit-button');
+    const nameInput = document.getElementById('name-input');
+    const tanuuContent = document.getElementById('tanuu-content');
+    const omContent = document.getElementById('om-content');
+    const rashmiContent = document.getElementById('rashmi-content');
+    const otherContent = document.getElementById('other-content');
+    const nameForm = document.getElementById('name-form');
+
+    submitButton.addEventListener('click', () => {
+      const name = nameInput.value.trim().toLowerCase();
+      nameForm.style.display = 'none';
+
+      // Hide all content sections first
+      tanuuContent.classList.remove('active');
+      omContent.classList.remove('active');
+      rashmiContent.classList.remove('active');
+      otherContent.classList.remove('active');
+
+      if (name === 'tanu') {
+        tanuuContent.classList.add('active');
+      } else if (name === 'om') {
+        omContent.classList.add('active');
+      } else if (name === 'rashmi') {
+        rashmiContent.classList.add('active');
+      } else {
+        otherContent.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
